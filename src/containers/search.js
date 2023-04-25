@@ -50,7 +50,6 @@ export default function HomeContainer() {
             >
               <IconButton
                 // size="small"
-                edge="right"
                 color="inherit"
                 aria-label="menu"
               >
@@ -95,13 +94,7 @@ export default function HomeContainer() {
                       >
                         Category
                       </Typography>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          mt: 1,
-                        }}
-                      >
+                      <Stack gap={2}>
                         <Typography variant="h6">$40</Typography>
                         <Box
                           sx={{
@@ -120,7 +113,7 @@ export default function HomeContainer() {
                             <MdAdd />
                           </IconButton>
                         </Box>
-                      </Box>
+                      </Stack>
                     </Box>
                   </Paper>
                 </Grid>

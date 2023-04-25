@@ -271,8 +271,6 @@ alignItems: 'center'}}>
           }}
         >
           <IconButton
-            // size="small"
-            edge="right"
             color="inherit"
             aria-label="menu"
             onClick={openFilter}
