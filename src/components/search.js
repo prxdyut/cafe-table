@@ -56,6 +56,7 @@ export default function TopBar() {
   const [foodType, setfoodType] = React.useState(() => []);
   const [servings, setServings] = React.useState(null);
   const [priceRange, setpriceRange] = React.useState([20, 30]);
+
   
   React.useEffect(() => {
     !(typeof router.query.search == "undefined") &&
@@ -156,7 +157,6 @@ export default function TopBar() {
             <MenuItem
               key={name}
               value={name}
-              // style={getStyles(name, selectValue, theme)}
             >
               {name}
             </MenuItem>
@@ -198,7 +198,7 @@ export default function TopBar() {
       </Box>
     );
   }
-  console.log(router.query);
+  
   function ServingsChipSingle() {
     return (
       <Box sx={{ mt: -1 }}>
@@ -224,38 +224,30 @@ color:  i + 1 == servings && 'white', }}
       </Box>
     );
   }
-  
-  
-function MinimumDistanceSlider() {
-const minDistance = 10;
+ 
+    
+function MinimumDistanceSlider() { 
 
-  const handleChange1 = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-
-    if (activeThumb === 0) {
-      setpriceRange([Math.min(newValue[0], priceRange[1] - minDistance), priceRange[1]]);
-    } else {
-      setpriceRange([priceRange[0], Math.max(newValue[1], priceRange[0] + minDistance)]);
-    }
+  const handleChange = (event, newValue) => {
+    setpriceRange(newValue);
   };
-  
-function valuetext(value) {
-  return `${value}°C`;
-}
-
 
   return (
-    <Box sx={{ mt:-1}}>
-      <Slider
-        getAriaLabel={() => 'Minimum distance'}
+    <Box sx={{ mt:-1, display: 'flex',
+alignItems: 'center'}}>
+      <Typography>
+        $00
+      </Typography>
+      
+<Slider
+        getAriaLabel={() => 'Temperature range'}
         value={priceRange}
-        onChange={handleChange1}
+        onChange={handleChange}
         valueLabelDisplay="auto"
-        getAriaValueText={valuetext}
-        disableSwap
-      />    </Box>
+      />
+      <Typography>
+        $1000+
+      </Typography></Box>
   );
 }
   return (
@@ -347,6 +339,7 @@ function valuetext(value) {
               >
                 {["a", "b", "c", "d", "e"].map((v, l) => (
                   <ListItemButton
+                  key={i}
                   //   selected={selectedIndex === 2}
                   // onClick={(event) =>
                   //   router.push({
