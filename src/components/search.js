@@ -337,7 +337,7 @@ alignItems: 'center'}}>
                 aria-label="secondary mailbox folder"
                 // onFocus={() => console.log(inputElement.current.classList)}
               >
-                {["a", "b", "c", "d", "e"].map((v, l) => (
+                {["a", "b", "c", "d", "e"].map((v, i) => (
                   <ListItemButton
                   key={i}
                   //   selected={selectedIndex === 2}
