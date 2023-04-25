@@ -1,9 +1,9 @@
 import * as React from "react";
 import Head from "next/head";
-import Container from "/project/cafe-table/src/containers/home";
-import Top from "/project/cafe-table/src/components/top-bar";
-import Layout from "/project/cafe-table/src/components/layout";
-import Bottom from "/project/cafe-table/src/components/bottom-bar";
+import Container from "../containers/home";
+import Top from "../components/top-bar";
+import Layout from "../components/layout";
+import Bottom from "../components/bottom-bar";
 
 export default function HomePage() {
   return (
