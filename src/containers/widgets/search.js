@@ -55,8 +55,9 @@ export default function TopBar() {
 
   React.useEffect(
     () =>
-      !!localStorage.getItem("searchHistory") &&
-      setHistory(localStorage.getItem("searchHistory").split(",")),
+      !!localStorage.getItem("searchHistory")
+        ? setHistory(localStorage.getItem("searchHistory").split(","))
+        : localStorage.setItem("searchHistory", ""),
     [router, value]
   );
 
