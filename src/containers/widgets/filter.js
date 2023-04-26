@@ -151,6 +151,7 @@ function ServingsCount() {
           .fill()
           .map((v, i) => (
             <Box
+              key={i}
               sx={{
                 background: i + 1 == servings && "black",
                 color: i + 1 == servings && "white",
@@ -207,8 +208,8 @@ function Category() {
         <FormControl component="fieldset" variant="standard">
           <FormGroup>
             <Grid container>
-              {["a", "some thing big", "c", "d", "e"].map((v) => (
-                <Grid item xs={6}>
+              {["a", "some thing big", "c", "d", "e"].map((v, i) => (
+                <Grid item xs={6} key={i}>
                   <FormControlLabel
                     control={
                       <Checkbox
