@@ -6,7 +6,8 @@
   "tasks": {
     "npm run dev": {
       "name": "npm run dev",
-      "command": "npm run dev"
+      "command": "npm run dev",
+      "runAtStart": true
     }
   }
 }
