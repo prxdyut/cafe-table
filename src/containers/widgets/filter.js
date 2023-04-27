@@ -34,6 +34,7 @@ import {
   MdOutlineArrowBackIosNew,
   MdSearch,
   MdHistory,
+  MdStar,
 } from "react-icons/md";
 import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
@@ -51,8 +52,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import Input from "@mui/material/Input";
+import Rating from "@mui/material/Rating";
 
-export default function TopBar() {
+export default function FilterWidgetContainer() {
   const router = useRouter();
 
   return (
@@ -66,6 +68,8 @@ export default function TopBar() {
           mb: 1,
           position: "sticky",
           top: "0",
+          background: "white",
+          zIndex: "9",
         }}
       >
         <Toolbar>
@@ -81,11 +85,12 @@ export default function TopBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Container sx={{ py: 2 }}>
+      <Container sx={{ pt: 2 }}>
         <Stack gap={3}>
           <Category />
           <FoodTypeSelector />
           <ServingsCount />
+          <HoverRating />
           <Price />
         </Stack>
       </Container>
@@ -238,8 +243,8 @@ function Price() {
     localStorage.setItem("filterPriceRange", JSON.stringify(priceRange));
   }, [priceRange]);
   return (
-    <>
-      <Typography variant="body1" fontWeight={500}>
+    <Box sx={{ pb: 2, position: "sticky", bottom: "0", background: "white" }}>
+      <Typography variant="body1" fontWeight={500} sx={{ mb: 2 }}>
         Price Range
       </Typography>
       <Box sx={{ mt: -1 }}>
@@ -311,6 +316,46 @@ function Price() {
             />
           </Grid>
         </Grid>
+      </Box>
+    </Box>
+  );
+}
+
+function HoverRating() {
+  const [value, setValue] = React.useState(2);
+  const [hover, setHover] = React.useState(-1);
+
+  React.useEffect(() => {
+    localStorage.setItem("filterRatings", value);
+  }, [value]);
+
+  return (
+    <>
+      <Typography variant="body1" fontWeight={500}>
+        Ratings
+      </Typography>
+      <Box
+        sx={{
+          mt: -1,
+          //   width: 200,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Rating
+          name="hover-feedback"
+          value={value}
+          precision={0.5}
+          // getLabelText={getLabelText}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          onChangeActive={(event, newHover) => {
+            setHover(newHover);
+          }}
+          emptyIcon={<MdStar style={{ opacity: 0.5 }} />}
+        />
+        {value !== null && <Box sx={{ ml: 2 }}>{value}</Box>}
       </Box>
     </>
   );
