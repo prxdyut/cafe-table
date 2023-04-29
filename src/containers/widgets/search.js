@@ -48,7 +48,7 @@ import Select from "@mui/material/Select";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-export default function TopBar() {
+export default function SearchWidgetContainer() {
   const router = useRouter();
   const [value, setValue] = React.useState("");
   const [history, setHistory] = React.useState([]);
@@ -96,6 +96,7 @@ export default function TopBar() {
               localStorage.setItem("searchHistory", [...history, value]);
               router.push({
                 pathname: "/search/",
+                // pathname: "/",
                 query: { q: value.trim() },
               });
             }}
@@ -105,25 +106,23 @@ export default function TopBar() {
         </Toolbar>
       </AppBar>
       <List>
-        {[value, ...history]
-          .slice(0, value.trim() == "" ? 15 : 14)
-          .map((v, i) => (
-            <>
-              {v.trim() != "" && (
-                <ListItemButton
-                  key={i}
-                  onClick={() =>
-                    router.push({ pathname: "/search/", query: { q: v } })
-                  }
-                >
-                  <ListItemIcon sx={{ ml: 1, mr: -2 }}>
-                    <MdHistory />
-                  </ListItemIcon>
-                  <ListItemText primary={v} />
-                </ListItemButton>
-              )}
-            </>
-          ))}
+        {[value, ...[...history].reverse()].slice(0, 15 + 1).map((v, i) => (
+          <>
+            {v.trim() != "" && (
+              <ListItemButton
+                key={i}
+                onClick={() =>
+                  router.push({ pathname: "/search/", query: { q: v } })
+                }
+              >
+                <ListItemIcon sx={{ ml: 1, mr: -2 }}>
+                  <MdHistory />
+                </ListItemIcon>
+                <ListItemText primary={v} />
+              </ListItemButton>
+            )}
+          </>
+        ))}
       </List>
     </>
   );

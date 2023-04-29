@@ -94,7 +94,13 @@ export default function HomeContainer() {
                       >
                         Category
                       </Typography>
-                      <Stack gap={2}>
+                      <Stack
+                        gap={2}
+                        sx={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                        }}
+                      >
                         <Typography variant="h6">$40</Typography>
                         <Box
                           sx={{
