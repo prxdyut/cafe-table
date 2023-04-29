@@ -41,7 +41,7 @@ export default function HomeContainer() {
             sx={{ overflow: "scroll", mx: -2, px: 2, py: 0.2 }}
           >
             {["", "", "", "", ""].map((v, i) => (
-              <Box sx={i}>
+              <Box sx={i} key={i}>
                 <Paper
                   elevation={3}
                   key={i}
@@ -119,30 +119,33 @@ export default function HomeContainer() {
                       }}
                     >
                       <Stack
-                      gap={0.5}
-                      direction="row" sx={{
-                        justifyContent: "space-around",
-                        //   mb: 1,
-                        background: "black",
-                        color: "white",
-                        borderRadius: 1,
-                        //   width: "50%",
-                        alignItems: "center",}}>
-                      <IconButton
-                        size="small"
-                        style={{ color: "white" }}
-                        onClick={() => console.log("+")}
+                        gap={0.5}
+                        direction="row"
+                        sx={{
+                          justifyContent: "space-around",
+                          //   mb: 1,
+                          background: "black",
+                          color: "white",
+                          borderRadius: 1,
+                          //   width: "50%",
+                          alignItems: "center",
+                        }}
                       >
-                        <HiPlus />
-                      </IconButton>
-                      <Typography>5</Typography>
-                      <IconButton
-                        size="small"
-                        style={{ color: "white" }}
-                        onClick={(e) => console.log("-")}
-                      >
-                        <HiMinus />
-                      </IconButton>
+                        <IconButton
+                          size="small"
+                          style={{ color: "white" }}
+                          onClick={() => console.log("+")}
+                        >
+                          <HiPlus />
+                        </IconButton>
+                        <Typography>5</Typography>
+                        <IconButton
+                          size="small"
+                          style={{ color: "white" }}
+                          onClick={(e) => console.log("-")}
+                        >
+                          <HiMinus />
+                        </IconButton>
                       </Stack>
                       <IconButton
                         size="small"
