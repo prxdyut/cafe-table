@@ -41,7 +41,7 @@ export default function HomeContainer() {
             sx={{ overflow: "scroll", mx: -2, px: 2, py: 0.2 }}
           >
             {["", "", "", "", ""].map((v, i) => (
-              <Box>
+              <Box sx={i}>
                 <Paper
                   elevation={3}
                   key={i}
@@ -106,7 +106,7 @@ export default function HomeContainer() {
                     }}
                   >
                     <Stack
-                      gap={0.5}
+                      gap={1}
                       direction="row"
                       sx={{
                         position: "absolute",
@@ -115,16 +115,19 @@ export default function HomeContainer() {
                         width: "fit-content",
                         //   py: 1.5,
                         //   px: 3,
-                        borderRadius: 2,
                         position: "relative",
+                      }}
+                    >
+                      <Stack
+                      gap={0.5}
+                      direction="row" sx={{
                         justifyContent: "space-around",
                         //   mb: 1,
                         background: "black",
                         color: "white",
+                        borderRadius: 1,
                         //   width: "50%",
-                        alignItems: "center",
-                      }}
-                    >
+                        alignItems: "center",}}>
                       <IconButton
                         size="small"
                         style={{ color: "white" }}
@@ -140,9 +143,10 @@ export default function HomeContainer() {
                       >
                         <HiMinus />
                       </IconButton>
+                      </Stack>
                       <IconButton
                         size="small"
-                        style={{ color: "white" }}
+                        style={{ color: "black" }}
                         onClick={(e) => console.log("-")}
                       >
                         <MdDelete />
@@ -179,7 +183,9 @@ export default function HomeContainer() {
               <Typography>$100</Typography>
             </Paper>
             <Box sx={{ background: "black", color: "white", borderRadius: 2 }}>
-              <Button color="inherit">PROCEED</Button>
+              <Button color="inherit" fullWidth>
+                PROCEED
+              </Button>
             </Box>
           </Stack>
         </Stack>
