@@ -41,7 +41,7 @@ export default function HomeContainer() {
       <React.Fragment>
         <Box sx={{ mx: -2 }}>
           {["", "", ""].map((item, i) => (
-            <Accordion elevation={0}>
+            <Accordion elevation={0} key={i}>
               <AccordionSummary
                 aria-controls="panel1a-content"
                 id="panel1a-header"
