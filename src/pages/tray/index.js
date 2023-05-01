@@ -22,7 +22,7 @@ export default function HomePage() {
 HomePage.getLayout = function getLayout(page) {
   return (
     <React.Fragment>
-      <App />
+      <App back title="Tray" right />
       <Layout>{page}</Layout>
     </React.Fragment>
   );

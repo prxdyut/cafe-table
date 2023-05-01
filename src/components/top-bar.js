@@ -28,9 +28,8 @@ import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { useRouter } from "next/router";
 
-export default function TopBar() {
+export default function TopBar(props) {
   const router = useRouter();
-
   return (
     <AppBar
       position="static"

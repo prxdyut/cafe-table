@@ -28,8 +28,13 @@ import {
 import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import { useRouter } from "next/router";
 
-export default function TopBar() {
+export default function TopBar(props) {
+  const router = useRouter();
+  console.log(props);
+  console.log(!!props.back);
+  console.log(!!props.active);
   return (
     <AppBar
       position="static"
@@ -37,25 +42,37 @@ export default function TopBar() {
       sx={{ background: "none", color: "unset", mb: 1 }}
     >
       <Toolbar sx={{ my: 2 }}>
-        <IconButton
-          //   size="small"
-          color="inherit"
-          aria-label="menu"
-          sx={{ boxShadow: 0, borderRadius: 1 }}
-        >
-          <MdOutlineArrowBackIosNew />
-        </IconButton>
-        <Box sx={{ flexGrow: "1" }} textAlign="center">
-          <Typography variant="h6">Search</Typography>
-        </Box>
-        <IconButton
-          //   size="small"
-          color="inherit"
-          aria-label="menu"
-          sx={{ boxShadow: 0, borderRadius: 1 }}
-        >
-          <GiForkKnifeSpoon />
-        </IconButton>
+        {!!props.left && <IconButton />}
+        {!!props.back && (
+          <IconButton
+            //   size="small"
+            color="inherit"
+            aria-label="menu"
+            sx={{ boxShadow: 0, borderRadius: 1 }}
+          >
+            <MdOutlineArrowBackIosNew />
+          </IconButton>
+        )}
+        {!!props.title && (
+          <Box sx={{ flexGrow: "1" }} textAlign="center">
+            <Typography variant="h6">{props.title}</Typography>
+          </Box>
+        )}
+        {!!props.tray && (
+          <IconButton
+            //   size="small"
+            color="inherit"
+            aria-label="menu"
+            sx={{ boxShadow: 0, borderRadius: 1 }}
+          >
+            <GiForkKnifeSpoon />
+          </IconButton>
+        )}
+        {!!props.right && (
+          <IconButton>
+            <Box />
+          </IconButton>
+        )}
       </Toolbar>
     </AppBar>
   );
