@@ -127,6 +127,7 @@ export default function TopBar() {
           sx={{ flexGrow: 1, borderRadius: 1 }}
           onFocus={openSearch}
           onChange={openSearch}
+          value={router.query.q}
         />
         <Box
           sx={{

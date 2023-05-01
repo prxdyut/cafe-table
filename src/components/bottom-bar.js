@@ -32,10 +32,11 @@ export default function TopBar(props) {
   const router = useRouter();
   const activeRootPath = router.pathname.split("/")[1];
   const activeTab = {
-    width: "fit-content",
     background: "black",
     color: "white",
     borderRadius: "8px",
+    width: "fit-content",
+    m: "auto",
   };
 
   return (
@@ -45,29 +46,37 @@ export default function TopBar(props) {
           background: "rgb(255 255 255 / 100%)",
           position: "fixed",
           width: "100%",
+          width: "100%",
           bottom: "0px",
         }}
       >
-        <Box sx={{ pb: 2, px: 1, pt: 1 }}>
+        <Box
+          sx={{
+            pb: 2,
+            px: 1,
+            pt: 1,
+            "& > div > div > div": { width: "fit-content", m: "auto" },
+            "& > div > div > div.active": {
+              background: "black",
+              color: "white",
+              borderRadius: 2,
+            },
+          }}
+        >
           <Grid container>
-            <Grid item xs sx={{ textAlign: "end" }}>
+            <Grid item xs>
               <Box
-                sx={activeRootPath == "" && { ...activeTab }}
-                onClick={() => router.push("/explore")}
+                className={activeRootPath == "home" && "active"}
+                onClick={() => router.push("/home")}
               >
                 <IconButton color="inherit">
                   <FiHome />
                 </IconButton>
               </Box>
             </Grid>
-            <Grid item xs sx={{ textAlign: "center" }}>
+            <Grid item xs>
               <Box
-                sx={{
-                  width: "fit-content",
-                  borderRadius: 2,
-                  m: "auto",
-                  border: 2,
-                }}
+                className={activeRootPath == "tray" && "active"}
                 onClick={() => router.push("/tray")}
               >
                 <IconButton color="inherit">
@@ -75,9 +84,9 @@ export default function TopBar(props) {
                 </IconButton>
               </Box>
             </Grid>
-            <Grid item xs sx={{ textAlign: "start" }}>
+            <Grid item xs>
               <Box
-                sx={activeRootPath == "explore" && { ...activeTab }}
+                className={activeRootPath == "explore" && "active"}
                 onClick={() => router.push("/explore")}
               >
                 <IconButton color="inherit">

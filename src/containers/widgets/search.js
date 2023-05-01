@@ -50,6 +50,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 export default function SearchWidgetContainer() {
   const router = useRouter();
+  const searchQuery = router.query.q;
   const [value, setValue] = React.useState("");
   const [history, setHistory] = React.useState([]);
 
@@ -61,12 +62,10 @@ export default function SearchWidgetContainer() {
     [router, value]
   );
 
-  //   React.useEffect(
-  //     () => localStorage.setItem("searchHistory", JSON.stringify(history)),
-  //     [history]
-  //   );
-
-  console.log(history);
+  React.useEffect(
+    () => (!!searchQuery ? setValue(searchQuery) : setValue("")),
+    [searchQuery]
+  );
 
   return (
     <>
@@ -76,7 +75,11 @@ export default function SearchWidgetContainer() {
         sx={{ background: "none", color: "unset", mb: 1 }}
       >
         <Toolbar>
-          <IconButton color="inherit" aria-label="menu" onClick={close}>
+          <IconButton
+            color="inherit"
+            aria-label="menu"
+            onClick={() => router.back()}
+          >
             <MdOutlineArrowBackIosNew />
           </IconButton>
           <Box sx={{ flexGrow: "1", mx: 1 }}>
@@ -86,6 +89,15 @@ export default function SearchWidgetContainer() {
               autoFocus
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onSubmit={() => {
+                localStorage.setItem("searchHistory", [...history, value]);
+                router.push({
+                  pathname: "/search/",
+                  // pathname: "/",
+                  query: { q: value.trim() },
+                });
+              }}
+              type="search"
             />
           </Box>
           <IconButton
