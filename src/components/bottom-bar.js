@@ -17,6 +17,7 @@ import Link from "next/link";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import {
   MdFilterList,
+  MdOutlineReceiptLong,
   MdAdd,
   MdCopyAll,
   MdOutlinePhotoLibrary,
@@ -26,72 +27,68 @@ import {
 import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import { useRouter } from "next/router";
+export default function TopBar(props) {
+  const router = useRouter();
+  const activeRootPath = router.pathname.split("/")[1];
+  const activeTab = {
+    width: "fit-content",
+    background: "black",
+    color: "white",
+    borderRadius: "8px",
+  };
 
-export default function TopBar() {
   return (
-    <Box
-      sx={{
-        background: "rgb(255 255 255 / 100%)",
-        position: "fixed",
-        width: "100%",
-        bottom: "0",
-      }}
-    >
-      <Box sx={{ pb: 2, px: 1, pt: 1 }}>
-        <Grid container>
-          <Grid item xs>
-            <Box
-              sx={{
-                color: "white",
-                width: "fit-content",
-                background: "black",
-                borderRadius: "12px",
-                m: "auto",
-              }}
-            >
-              <IconButton color="inherit">
-                <FiHome />
-              </IconButton>
-            </Box>
+    <>
+      <Box
+        sx={{
+          background: "rgb(255 255 255 / 100%)",
+          position: "fixed",
+          width: "100%",
+          bottom: "0",
+        }}
+      >
+        <Box sx={{ pb: 2, px: 1, pt: 1 }}>
+          <Grid container>
+            <Grid item xs sx={{ textAlign: "end" }}>
+              <Box
+                sx={activeRootPath == "" && { ...activeTab }}
+                onClick={() => router.push("/explore")}
+              >
+                <IconButton color="inherit">
+                  <FiHome />
+                </IconButton>
+              </Box>
+            </Grid>
+            <Grid item xs sx={{ textAlign: "center" }}>
+              <Box
+                sx={{
+                  width: "fit-content",
+                  borderRadius: 2,
+                  m: "auto",
+                  border: 2,
+                }}
+                onClick={() => router.push("/tray")}
+              >
+                <IconButton color="inherit">
+                  <GiForkKnifeSpoon />
+                </IconButton>
+              </Box>
+            </Grid>
+            <Grid item xs sx={{ textAlign: "start" }}>
+              <Box
+                sx={activeRootPath == "explore" && { ...activeTab }}
+                onClick={() => router.push("/explore")}
+              >
+                <IconButton color="inherit">
+                  <TbGridDots />
+                </IconButton>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs sx={{ textAlign: "center" }}>
-            <Box>
-              <IconButton>
-                <TbGridDots />
-              </IconButton>
-            </Box>
-          </Grid>
-          <Grid item xs sx={{ textAlign: "center" }}>
-            <Box
-              sx={{
-                width: "fit-content",
-                borderRadius: "12px",
-                m: "auto",
-                border: 2,
-                borderColor: "text.secondary",
-              }}
-            >
-              <IconButton>
-                <GiForkKnifeSpoon />
-              </IconButton>
-            </Box>
-          </Grid>
-          <Grid item xs sx={{ textAlign: "center" }}>
-            <Box>
-              <IconButton>
-                <MdOutlinePhotoLibrary />
-              </IconButton>
-            </Box>
-          </Grid>
-          <Grid item xs sx={{ textAlign: "center" }}>
-            <Box>
-              <IconButton>
-                <MdManageAccounts />
-              </IconButton>
-            </Box>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
+      <Box sx={{ height: "68px", width: "100%", pt: 2 }} />
+    </>
   );
 }

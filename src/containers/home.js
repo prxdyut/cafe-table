@@ -37,7 +37,7 @@ export default function HomeContainer() {
             Eat <br /> Something Special
           </Typography>
           <SearchBar />
-          <Stack
+          {/* <Stack
             direction="row"
             gap={1}
             sx={{ overflow: "scroll", mx: -2, px: 2 }}
@@ -50,7 +50,7 @@ export default function HomeContainer() {
                 sx={{ borderRadius: 1, border: 1 }}
               />
             ))}
-          </Stack>
+          </Stack> */}
 
           <Paper>
             <AspectRatio ratio="2/1" sx={{ width: "100%" }} objectFit="contain">
