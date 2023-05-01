@@ -26,38 +26,14 @@ import {
 import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import SearchBar from "../components/search";
 
 export default function HomeContainer() {
   return (
     <>
       <React.Fragment>
         <Stack gap={3}>
-          <Box sx={{ display: "flex", px: 1 }}>
-            <TextField
-              id="outlined-basic"
-              placeholder="Outlined"
-              variant="outlined"
-              size="small"
-              sx={{ flexGrow: 1, borderRadius: 1 }}
-            />
-            <Box
-              sx={{
-                background: "black",
-                color: "white",
-                borderRadius: 1,
-                ml: 2,
-              }}
-            >
-              <IconButton
-                // size="small"
-                edge="right"
-                color="inherit"
-                aria-label="menu"
-              >
-                <MdFilterList />
-              </IconButton>
-            </Box>
-          </Box>
+          <SearchBar />
           <Box
             sx={{
               display: "flex",

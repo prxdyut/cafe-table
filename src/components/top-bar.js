@@ -26,8 +26,11 @@ import {
 import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import { useRouter } from "next/router";
 
 export default function TopBar() {
+  const router = useRouter();
+
   return (
     <AppBar
       position="static"
@@ -36,7 +39,12 @@ export default function TopBar() {
     >
       <Toolbar sx={{ py: 2 }}>
         <Box sx={{ flexGrow: "1" }} />
-        <IconButton size="small" color="inherit" aria-label="menu">
+        <IconButton
+          size="small"
+          color="inherit"
+          aria-label="menu"
+          onClick={() => router.push("/account")}
+        >
           <Avatar
             alt="Pradyut Das"
             src="https://i.pinimg.com/736x/e2/8d/4c/e28d4cdb52d9eb0e7c1bfdce10152983.jpg"
