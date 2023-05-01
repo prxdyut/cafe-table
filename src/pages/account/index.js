@@ -4,7 +4,6 @@ import Container from "../../containers/account";
 import App from "../../components/app-bar";
 import Bar from "../../components/search";
 import Layout from "../../components/layout";
-import Bottom from "../components/bottom-bar";
 
 export default function HomePage() {
   return (
@@ -25,7 +24,6 @@ HomePage.getLayout = function getLayout(page) {
     <React.Fragment>
       <App />
       <Layout>{page}</Layout>
-      
     </React.Fragment>
   );
 };

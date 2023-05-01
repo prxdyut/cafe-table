@@ -35,7 +35,6 @@ export default function TopBar(props) {
     width: "fit-content",
     background: "black",
     color: "white",
-    margin: "auto",
     borderRadius: "8px",
   };
 
@@ -51,23 +50,13 @@ export default function TopBar(props) {
       >
         <Box sx={{ pb: 2, px: 1, pt: 1 }}>
           <Grid container>
-            <Grid item xs sx={{ textAlign: "center" }}>
+            <Grid item xs sx={{ textAlign: "end" }}>
               <Box
-                sx={activeRootPath == "" && activeTab}
-                onClick={() => router.push("/")}
-              >
-                <IconButton color="inherit">
-                  <FiHome />
-                </IconButton>
-              </Box>
-            </Grid>
-            <Grid item xs sx={{ textAlign: "center" }}>
-              <Box
-                sx={activeRootPath == "explore" && activeTab}
+                sx={activeRootPath == "" && { ...activeTab }}
                 onClick={() => router.push("/explore")}
               >
                 <IconButton color="inherit">
-                  <TbGridDots />
+                  <FiHome />
                 </IconButton>
               </Box>
             </Grid>
@@ -86,26 +75,14 @@ export default function TopBar(props) {
                 </IconButton>
               </Box>
             </Grid>
-            <Grid item xs sx={{ textAlign: "center" }}>
+            <Grid item xs sx={{ textAlign: "start" }}>
               <Box
-                sx={activeRootPath == "orders" && activeTab}
-                onClick={() => router.push("/orders")}
+                sx={activeRootPath == "explore" && { ...activeTab }}
+                onClick={() => router.push("/explore")}
               >
                 <IconButton color="inherit">
-                  <MdOutlineReceiptLong />
+                  <TbGridDots />
                 </IconButton>
-              </Box>
-            </Grid>
-            <Grid item xs sx={{ textAlign: "center" }}>
-              <Box>
-                <Box
-                  sx={activeRootPath == "account" && activeTab}
-                  onClick={() => router.push("/account")}
-                >
-                  <IconButton color="inherit">
-                    <MdManageAccounts />
-                  </IconButton>
-                </Box>
               </Box>
             </Grid>
           </Grid>
