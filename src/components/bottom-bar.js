@@ -45,7 +45,7 @@ export default function TopBar(props) {
           background: "rgb(255 255 255 / 100%)",
           position: "fixed",
           width: "100%",
-          bottom: "0",
+          bottom: "0px",
         }}
       >
         <Box sx={{ pb: 2, px: 1, pt: 1 }}>
