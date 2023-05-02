@@ -29,11 +29,9 @@ import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import SearchBar from "../components/search";
 import { HiMinus, HiPlus } from "react-icons/hi";
-import { LoadingContext } from "../contexts/loading";
+import { LoadingContext, AuthContext } from "../contexts";
 
 export default function HomeContainer() {
-  const { loading, setLoading } = React.useContext(LoadingContext);
-
   return (
     <>
       <React.Fragment>

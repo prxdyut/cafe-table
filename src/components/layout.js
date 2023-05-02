@@ -26,11 +26,23 @@ import {
 import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import { motion } from "framer-motion";
 
 export default function Layout({ children }) {
   return (
-    <main>
-      <Container>{children}</Container>
-    </main>
+    <motion.div
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 300, opacity: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }}
+    >
+      <main>
+        <Container>{children}</Container>
+      </main>
+    </motion.div>
   );
 }

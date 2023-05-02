@@ -1,7 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
 import Container from "../../../containers/checkout-success";
-import App from "../../../components/top-bar";
+import Top from "../../../components/top-bar";
 import Bar from "../../../components/search";
 import Layout from "../../../components/layout";
 
