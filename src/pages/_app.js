@@ -15,13 +15,13 @@ export default function MyApp({
   const [loading, setLoading] = React.useState(false);
   const [auth, setAuth] = React.useState(false);
 
-  return getLayout(
+  return (
     <SessionProvider session={session}>
       <LoadingContext.Provider value={{ loading, setLoading }}>
         <AuthContext.Provider value={{ auth, setAuth }}>
           <BackendFunctions>
-            <AnimatePresence mode="wait" initial={false}>
-              <Component {...pageProps} key={router.pathname} />
+            <AnimatePresence mode="wait">
+              {getLayout(<Component {...pageProps} key={router.asPath} />)}
             </AnimatePresence>
           </BackendFunctions>
         </AuthContext.Provider>

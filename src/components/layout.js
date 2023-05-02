@@ -39,6 +39,12 @@ export default function Layout({ children }) {
         stiffness: 260,
         damping: 20,
       }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0 }}
+      // transition={{
+      //   duration: 2,
+      // }}
     >
       <main>
         <Container>{children}</Container>
