@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import BackendFunctions from "../backend-functions";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function MyApp({
   Component,
@@ -14,15 +15,24 @@ export default function MyApp({
   const getLayout = Component.getLayout || ((page) => page);
   const [loading, setLoading] = React.useState(false);
   const [auth, setAuth] = React.useState(false);
-
+  console.log(router.asPath);
   return (
     <SessionProvider session={session}>
       <LoadingContext.Provider value={{ loading, setLoading }}>
         <AuthContext.Provider value={{ auth, setAuth }}>
           <BackendFunctions>
-            <AnimatePresence mode="wait">
-              {getLayout(<Component {...pageProps} key={router.asPath} />)}
-            </AnimatePresence>
+            {getLayout(
+              <AnimatePresence>
+                <motion.div
+                  initial={{ x: "100vw" }}
+                  animate={{ opacity: 1, x: "0vw" }}
+                  exit={{ opacity: 0 }}
+                  key={router.asPath}
+                >
+                  <Component {...pageProps} />
+                </motion.div>
+              </AnimatePresence>
+            )}
           </BackendFunctions>
         </AuthContext.Provider>
       </LoadingContext.Provider>

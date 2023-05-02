@@ -4,6 +4,7 @@ import Container from "../../containers/home";
 import Top from "../../components/top-bar";
 import Layout from "../../components/layout";
 import Bottom from "../../components/bottom-bar";
+import { LayoutGroup, motion } from "framer-motion";
 
 export default function HomePage() {
   return (
