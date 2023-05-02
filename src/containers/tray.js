@@ -29,6 +29,7 @@ import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import SearchBar from "../components/search";
 import { HiMinus, HiPlus } from "react-icons/hi";
+import { LoadingContext, AuthContext } from "../contexts";
 
 export default function HomeContainer() {
   return (

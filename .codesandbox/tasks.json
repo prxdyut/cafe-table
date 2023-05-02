@@ -8,6 +8,14 @@
       "name": "npm run dev",
       "command": "npm run dev",
       "runAtStart": true
+    },
+    "npm run start": {
+      "name": "npm run start",
+      "command": "npm run start"
+    },
+    "npm run build": {
+      "name": "npm run build",
+      "command": "npm run build"
     }
   }
 }

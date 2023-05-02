@@ -23,9 +23,8 @@ export default function HomePage() {
 HomePage.getLayout = function getLayout(page) {
   return (
     <React.Fragment>
-      <Top />
+      <Top back title="Orders" tray />
       <Layout>{page}</Layout>
-      <Bottom />
     </React.Fragment>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
 import Container from "../../../containers/checkout-success";
-import App from "../../../components/app-bar";
+import Top from "../../../components/top-bar";
 import Bar from "../../../components/search";
 import Layout from "../../../components/layout";
 
@@ -22,7 +22,7 @@ export default function HomePage() {
 HomePage.getLayout = function getLayout(page) {
   return (
     <React.Fragment>
-      <App />
+      <Top />
       <Layout>{page}</Layout>
     </React.Fragment>
   );

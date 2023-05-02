@@ -32,12 +32,17 @@ import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import SearchBar from "../components/search";
 import { HiMinus, HiPlus, HiBadgeCheck } from "react-icons/hi";
+import { createContext, useContext } from "react";
 
 export default function HomeContainer() {
   const [value, setValue] = React.useState(null);
   const inputElement = React.useRef();
 
+  const ThemeContext = createContext();
+  const theme = useContext(ThemeContext);
+
   React.useEffect(() => {
+    alert(theme);
     isNaN(Number(value && value.split("")[0]))
       ? !isNaN(Number(value && value.split("")[1]))
         ? !isNaN(Number(value && value.split("")[2]))
