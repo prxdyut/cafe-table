@@ -20,9 +20,11 @@ export default function MyApp({
       <LoadingContext.Provider value={{ loading, setLoading }}>
         <AuthContext.Provider value={{ auth, setAuth }}>
           <BackendFunctions>
-            <AnimatePresence mode="wait">
-              {getLayout(<Component {...pageProps} key={router.asPath} />)}
-            </AnimatePresence>
+            {getLayout(
+              <AnimatePresence mode="wait">
+                <Component {...pageProps} key={router.asPath} />
+              </AnimatePresence>
+            )}
           </BackendFunctions>
         </AuthContext.Provider>
       </LoadingContext.Provider>
