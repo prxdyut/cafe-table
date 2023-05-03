@@ -68,7 +68,7 @@ export default function SearchWidgetContainer() {
   );
 
   return (
-    <>
+    <Box>
       <AppBar
         position="static"
         elevation={2}
@@ -136,6 +136,6 @@ export default function SearchWidgetContainer() {
           </>
         ))}
       </List>
-    </>
+    </Box>
   );
 }

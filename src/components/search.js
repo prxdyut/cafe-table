@@ -2,6 +2,7 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import Slide from "@mui/material/Slide";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -45,6 +46,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import Dialog from "@mui/material/Dialog";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import SearchContainer from "../containers/widgets/search";
@@ -142,18 +144,26 @@ export default function TopBar() {
           </IconButton>
         </Box>
       </Box>
-      <AnimatePresence>
-        {open.search && (
-          <FadeAnimation>
-            <SearchContainer />
-          </FadeAnimation>
-        )}
-        {open.filter && (
-          <FadeAnimation>
-            <FilterContainer />
-          </FadeAnimation>
-        )}
-      </AnimatePresence>
+      <Dialog
+        fullScreen
+        open={open.search}
+        onClose={close}
+        TransitionComponent={Transition}
+      >
+        <SearchContainer />
+      </Dialog>
+      <Dialog
+        fullScreen
+        open={open.filter}
+        onClose={close}
+        TransitionComponent={Transition}
+      >
+        <FilterContainer />
+      </Dialog>
     </>
   );
 }
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
