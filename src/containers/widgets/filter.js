@@ -58,7 +58,7 @@ export default function FilterWidgetContainer() {
   const router = useRouter();
 
   return (
-    <>
+    <Box>
       <AppBar
         position="static"
         elevation={2}
@@ -94,7 +94,7 @@ export default function FilterWidgetContainer() {
           <Price />
         </Stack>
       </Container>
-    </>
+    </Box>
   );
 }
 
