@@ -71,7 +71,7 @@ export default function SearchWidgetContainer() {
     <Box>
       <AppBar
         position="static"
-        elevation={2}
+        elevation={0}
         sx={{ background: "none", color: "unset", mb: 1 }}
       >
         <Toolbar>
@@ -85,7 +85,7 @@ export default function SearchWidgetContainer() {
           <Box sx={{ flexGrow: "1", mx: 1 }}>
             <InputBase
               sx={{ width: "100%" }}
-              placeholder="search"
+              placeholder="Search"
               autoFocus
               value={value}
               onChange={(e) => setValue(e.target.value)}
@@ -93,7 +93,6 @@ export default function SearchWidgetContainer() {
                 localStorage.setItem("searchHistory", [...history, value]);
                 router.push({
                   pathname: "/search/",
-                  // pathname: "/",
                   query: { q: value.trim() },
                 });
               }}
@@ -119,10 +118,9 @@ export default function SearchWidgetContainer() {
       </AppBar>
       <List>
         {[value, ...[...history].reverse()].slice(0, 15 + 1).map((v, i) => (
-          <>
+          <React.Fragment key={i}>
             {v.trim() != "" && (
               <ListItemButton
-                key={i}
                 onClick={() =>
                   router.push({ pathname: "/search/", query: { q: v } })
                 }
@@ -133,7 +131,7 @@ export default function SearchWidgetContainer() {
                 <ListItemText primary={v} />
               </ListItemButton>
             )}
-          </>
+          </React.Fragment>
         ))}
       </List>
     </Box>

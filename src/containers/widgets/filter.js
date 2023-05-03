@@ -61,7 +61,7 @@ export default function FilterWidgetContainer() {
     <Box>
       <AppBar
         position="static"
-        elevation={2}
+        elevation={0}
         sx={{
           background: "none",
           color: "unset",
