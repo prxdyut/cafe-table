@@ -80,28 +80,24 @@ export default function TopBar() {
   const [filter, setFilter] = React.useState({});
 
   React.useEffect(() => {
-    !(typeof router.query.search == "undefined") &&
-      !open.search &&
-      setOpen({ filter: false, search: true });
-    typeof router.query.search == "undefined" &&
-      open.search &&
-      setOpen({ filter: false, search: false });
-    !(typeof router.query.filter == "undefined") &&
-      !open.filter &&
-      setOpen({ filter: true, search: false });
-    typeof router.query.filter == "undefined" &&
-      open.filter &&
-      setOpen({ filter: false, search: false });
+    typeof router.query.search == "undefined"
+      ? open.search && setOpen({ filter: false, search: false })
+      : !open.search && setOpen({ filter: false, search: true });
+    typeof router.query.filter == "undefined"
+      ? open.filter && setOpen({ filter: false, search: false })
+      : !open.filter && setOpen({ filter: true, search: false });
   }, [router.query]);
 
   const openSearch = () => {
     setOpen({ filter: false, search: true });
     router.push({ query: { ...router.query, search: "" } });
   };
+
   const openFilter = () => {
     setOpen({ filter: true, search: false });
     router.push({ query: { ...router.query, filter: "" } });
   };
+
   const close = () => {
     setOpen({ filter: false, search: false });
     router.push({
