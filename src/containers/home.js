@@ -15,6 +15,7 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import IconButton from "@mui/material/IconButton";
 import Link from "next/link";
 import { CgMenuLeftAlt } from "react-icons/cg";
+import Skeleton from "@mui/material/Skeleton";
 import {
   MdFilterList,
   MdAdd,
@@ -27,8 +28,17 @@ import { FiHome } from "react-icons/fi";
 import { TbGridDots } from "react-icons/tb";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import SearchBar from "../components/search";
+import * as API from "../backend-functions/commerce";
 
 export default function HomeContainer() {
+  const [data, setData] = React.useState({});
+
+  React.useEffect(() => {
+    API.getCategories().then((categories) => setData({ categories }));
+  }, []);
+
+  console.log(data);
+
   return (
     <>
       <React.Fragment>
@@ -36,22 +46,40 @@ export default function HomeContainer() {
           <Typography variant="h4" fontWeight={500}>
             Eat <br /> Something Special
           </Typography>
+          {JSON.stringify(data)}
           <SearchBar />
-          {/* <Stack
-            direction="row"
-            gap={1}
-            sx={{ overflow: "scroll", mx: -2, px: 2 }}
+          <Stack
+            direction={"row"}
+            gap={2}
+            sx={{ overflow: "scroll", mx: -2, px: 2, py: 0.2, mt: -1 }}
           >
-            {["", "", "", "", "", ""].map((v, i) => (
+            {["", "", "", "", ""].map((v, i) => (
               <Chip
                 key={i}
-                label="Clickable"
+                label="Clickable Link"
+                component="a"
+                href="#basic-chip"
                 variant="outlined"
-                sx={{ borderRadius: 1, border: 1 }}
+                clickable
+                sx={{ borderRadius: 1 }}
               />
             ))}
-          </Stack> */}
-
+          </Stack>
+          <Box sx={{ mx: -1 }}>
+            {Array(4)
+              .fill()
+              .map(() => (
+                <Skeleton
+                  variant="text"
+                  sx={{
+                    fontSize: "2rem",
+                    mx: 1,
+                    width: "calc(25% - 16px)",
+                    display: "inline-block",
+                  }}
+                />
+              ))}
+          </Box>
           <Paper>
             <AspectRatio ratio="2/1" sx={{ width: "100%" }} objectFit="contain">
               <Typography level="h2" component="div">
@@ -59,27 +87,61 @@ export default function HomeContainer() {
               </Typography>
             </AspectRatio>
           </Paper>
+          <Paper>
+            <AspectRatio ratio="2/1" sx={{ width: "100%" }} objectFit="contain">
+              <Skeleton variant="rounded" />
+            </AspectRatio>
+          </Paper>
           <Box>
             <Grid container gap={2}>
-              {["", "", "", ""].map((v, i) => (
-                <Grid key={i} item xs>
-                  <Paper elevation={0}>
-                    <AspectRatio
-                      ratio="1/1"
-                      sx={{ width: "100%", borderRadius: 2 }}
-                      objectFit="contain"
-                    >
-                      <Typography level="h2" component="div">
-                        Pic
-                      </Typography>
-                    </AspectRatio>
-                    <Typography variant="subtitle1" textAlign={"center"}>
-                      Categ
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
+              {!!data.categories
+                ? data.categories
+                    .sort(() => {
+                      return Math.random() - Math.random();
+                    })
+                    .splice(0, 4)
+                    .map((v, i) => (
+                      <Grid key={i} item xs>
+                        <Paper elevation={0}>
+                          <AspectRatio
+                            ratio="1/1"
+                            sx={{ width: "100%", borderRadius: 2 }}
+                            objectFit="contain"
+                          >
+                            <Typography level="h2" component="div">
+                              Pic
+                            </Typography>
+                          </AspectRatio>
+                          <Typography variant="subtitle1" textAlign={"center"}>
+                            {v.name}
+                          </Typography>
+                        </Paper>
+                      </Grid>
+                    ))
+                : ["", "", "", ""].map((v, i) => (
+                    <Grid key={i} item xs>
+                      <Paper elevation={0}>
+                        <AspectRatio
+                          ratio="1/1"
+                          sx={{ width: "100%", borderRadius: 2 }}
+                          objectFit="contain"
+                        >
+                          <Skeleton variant="rounded" />
+                        </AspectRatio>
+
+                        <Skeleton
+                          variant="text"
+                          sx={{ fontSize: "1rem", mx: 1 }}
+                        />
+                      </Paper>
+                    </Grid>
+                  ))}
+              {}
+              {}
             </Grid>
+          </Box>
+          <Box>
+            <Grid container gap={2}></Grid>
           </Box>
           <Box
             sx={{
@@ -143,6 +205,48 @@ export default function HomeContainer() {
                             <MdAdd />
                           </IconButton>
                         </Box>
+                      </Box>
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+          <Box>
+            <Grid container gap={2}>
+              {["", ""].map((v, i) => (
+                <Grid item xs key={i}>
+                  <Paper elevation={3}>
+                    <AspectRatio
+                      ratio="3/2"
+                      sx={{ width: "100%" }}
+                      objectFit="contain"
+                    >
+                      <Skeleton variant="rounded" />
+                    </AspectRatio>
+                    <Box sx={{ p: 1 }}>
+                      <Skeleton
+                        variant="text"
+                        sx={{ fontSize: "1.25rem", mr: 4 }}
+                      />
+                      <Skeleton
+                        variant="text"
+                        sx={{ fontSize: "1rem", mr: 7 }}
+                      />
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          mt: 1,
+                        }}
+                      >
+                        {" "}
+                        <Skeleton
+                          variant="text"
+                          sx={{ fontSize: "1.75rem", mr: 1 }}
+                          width={50}
+                        />
                       </Box>
                     </Box>
                   </Paper>
@@ -233,6 +337,62 @@ export default function HomeContainer() {
                         <MdAdd />
                       </IconButton>
                     </Box>
+                  </Box>
+                </Box>
+              </Paper>
+            ))}
+          </Stack>
+          <Stack
+            direction={"row"}
+            gap={2}
+            sx={{ overflow: "scroll", mx: -2, px: 2, py: 0.2 }}
+          >
+            {["", "", "", "", ""].map((v, i) => (
+              <Paper
+                elevation={3}
+                key={i}
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  minWidth: "75vw",
+                }}
+              >
+                <AspectRatio
+                  ratio="1/1"
+                  sx={{ width: "40%" }}
+                  objectFit="contain"
+                >
+                  <Skeleton variant="rounded" />
+                </AspectRatio>
+                <Box
+                  sx={{
+                    p: 1,
+                    flexGrow: "1",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box>
+                    <Skeleton
+                      variant="text"
+                      sx={{ fontSize: "1.25rem", mr: 4 }}
+                    />
+
+                    <Skeleton variant="text" sx={{ fontSize: "1rem", mr: 7 }} />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      mt: 1,
+                    }}
+                  >
+                    <Skeleton
+                      variant="text"
+                      sx={{ fontSize: "1.75rem", mr: 1 }}
+                      width={50}
+                    />
                   </Box>
                 </Box>
               </Paper>

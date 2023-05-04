@@ -76,30 +76,10 @@ const FadeAnimation = ({ children }) => {
 
 export default function TopBar() {
   const router = useRouter();
-  const [open, setOpen] = React.useState({ search: false, filter: false });
-  const [filter, setFilter] = React.useState({});
 
-  React.useEffect(() => {
-    typeof router.query.search == "undefined"
-      ? open.search && setOpen({ filter: false, search: false })
-      : !open.search && setOpen({ filter: false, search: true });
-    typeof router.query.filter == "undefined"
-      ? open.filter && setOpen({ filter: false, search: false })
-      : !open.filter && setOpen({ filter: true, search: false });
-  }, [router.query]);
-
-  const openSearch = () => {
-    setOpen({ filter: false, search: true });
-    router.push({ query: { ...router.query, search: "" } });
-  };
-
-  const openFilter = () => {
-    setOpen({ filter: true, search: false });
-    router.push({ query: { ...router.query, filter: "" } });
-  };
-
+  const openSearch = () => router.push({ query: { ...router.query, search: "" } });
+  const openFilter = () =>router.push({ query: { ...router.query, filter: "" } });
   const close = () => {
-    setOpen({ filter: false, search: false });
     router.push({
       query: {
         ...() => {
@@ -110,22 +90,16 @@ export default function TopBar() {
     });
   };
 
-  React.useEffect(() => {
-    setFilter(localStorage);
-  }, [router.query]);
-
   return (
     <>
       <Box sx={{ display: "flex", px: 1 }}>
         <TextField
-          id="outlined-basic"
-          placeholder="search"
           variant="outlined"
           size="small"
           sx={{ flexGrow: 1, borderRadius: 1 }}
-          onFocus={openSearch}
-          onChange={openSearch}
-          value={router.query.q}
+          onClick={openSearch}
+          disabled
+          value={router.query.q || "search"}
         />
         <Box
           sx={{
@@ -142,16 +116,14 @@ export default function TopBar() {
       </Box>
       <Dialog
         fullScreen
-        open={open.search}
-        onClose={close}
+        open={!(typeof router.query.search == "undefined")}
         TransitionComponent={Transition}
       >
         <SearchContainer />
       </Dialog>
       <Dialog
         fullScreen
-        open={open.filter}
-        onClose={close}
+        open={!(typeof router.query.filter == "undefined")}
         TransitionComponent={Transition}
       >
         <FilterContainer />

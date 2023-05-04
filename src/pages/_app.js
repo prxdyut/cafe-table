@@ -6,6 +6,8 @@ import BackendFunctions from "../backend-functions";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function MyApp({
   Component,
@@ -15,8 +17,7 @@ export default function MyApp({
   const getLayout = Component.getLayout || ((page) => page);
   const [loading, setLoading] = React.useState(false);
   const [auth, setAuth] = React.useState(false);
-  console.log(router.asPath);
-  
+
   return (
     <SessionProvider session={session}>
       <LoadingContext.Provider value={{ loading, setLoading }}>
@@ -28,7 +29,7 @@ export default function MyApp({
                   initial={{ x: "100vw" }}
                   animate={{ opacity: 1, x: "0vw" }}
                   exit={{ opacity: 0 }}
-                  key={router.asPath.split('?')[0]}
+                  key={router.asPath.split("?")[0]}
                 >
                   <Component {...pageProps} />
                 </motion.div>
