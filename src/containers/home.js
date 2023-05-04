@@ -68,7 +68,7 @@ export default function HomeContainer() {
           <Box sx={{ mx: -1 }}>
             {Array(4)
               .fill()
-              .map(() => (
+              .map((v, i) => (
                 <Skeleton
                   variant="text"
                   sx={{
@@ -77,6 +77,7 @@ export default function HomeContainer() {
                     width: "calc(25% - 16px)",
                     display: "inline-block",
                   }}
+                  key={i}
                 />
               ))}
           </Box>
