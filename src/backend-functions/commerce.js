@@ -12,6 +12,11 @@ export async function getProducts(slug) {
   return products;
 }
 
+export async function getAllProducts() {
+  const { data: products } = await commerce.products.list();
+  return products;
+}
+
 export async function getCategory(slug) {
   const data = await commerce.categories.retrieve(slug, { type: "slug" });
   return data;

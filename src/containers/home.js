@@ -31,13 +31,30 @@ import SearchBar from "../components/search";
 import * as API from "../backend-functions/commerce";
 
 export default function HomeContainer() {
-  const [data, setData] = React.useState({});
+  const [categories, setCategories] = React.useState(null);
+  const [allProducts, setAllProducts] = React.useState(null);
 
   React.useEffect(() => {
-    API.getCategories().then((categories) => setData({ categories }));
+    API.getCategories().then((categories) => setCategories(categories));
+    API.getAllProducts().then((allProducts) => setAllProducts(allProducts));
   }, []);
 
-  console.log(data);
+  const getAny4Categories = () => {
+    return categories
+      .sort(() => {
+        return Math.random() - Math.random();
+      })
+      .splice(0, 4);
+  };
+  const getAny2Products = () => {
+    return allProducts
+      .sort(() => {
+        return Math.random() - Math.random();
+      })
+      .splice(0, 2);
+  };
+
+  console.log(categories, allProducts);
 
   return (
     <>
@@ -46,7 +63,6 @@ export default function HomeContainer() {
           <Typography variant="h4" fontWeight={500}>
             Eat <br /> Something Special
           </Typography>
-          {JSON.stringify(data)}
           <SearchBar />
           <Stack
             direction={"row"}
@@ -83,43 +99,31 @@ export default function HomeContainer() {
           </Box>
           <Paper>
             <AspectRatio ratio="2/1" sx={{ width: "100%" }} objectFit="contain">
-              <Typography level="h2" component="div">
-                Offers / Ads
-              </Typography>
-            </AspectRatio>
-          </Paper>
-          <Paper>
-            <AspectRatio ratio="2/1" sx={{ width: "100%" }} objectFit="contain">
               <Skeleton variant="rounded" />
             </AspectRatio>
           </Paper>
           <Box>
             <Grid container gap={2}>
-              {!!data.categories
-                ? data.categories
-                    .sort(() => {
-                      return Math.random() - Math.random();
-                    })
-                    .splice(0, 4)
-                    .map((v, i) => (
-                      <Grid key={i} item xs>
-                        <Paper elevation={0}>
-                          <AspectRatio
-                            ratio="1/1"
-                            sx={{ width: "100%", borderRadius: 2 }}
-                            objectFit="contain"
-                          >
-                            <Typography level="h2" component="div">
-                              Pic
-                            </Typography>
-                          </AspectRatio>
-                          <Typography variant="subtitle1" textAlign={"center"}>
-                            {v.name}
+              {!!categories
+                ? getAny4Categories().map((v, i) => (
+                    <Grid key={i} item xs>
+                      <Paper elevation={0}>
+                        <AspectRatio
+                          ratio="1/1"
+                          sx={{ width: "100%", borderRadius: 2 }}
+                          objectFit="contain"
+                        >
+                          <Typography level="h2" component="div">
+                            Pic
                           </Typography>
-                        </Paper>
-                      </Grid>
-                    ))
-                : ["", "", "", ""].map((v, i) => (
+                        </AspectRatio>
+                        <Typography variant="subtitle1" textAlign={"center"}>
+                          {v.name}
+                        </Typography>
+                      </Paper>
+                    </Grid>
+                  ))
+                : Array(4).fill().map((v, i) => (
                     <Grid key={i} item xs>
                       <Paper elevation={0}>
                         <AspectRatio
@@ -160,7 +164,7 @@ export default function HomeContainer() {
           </Box>
           <Box>
             <Grid container gap={2}>
-              {["", ""].map((v, i) => (
+              {!!allProducts ? getAny2Products().map((v, i) => (
                 <Grid item xs key={i}>
                   <Paper elevation={3}>
                     <AspectRatio
@@ -210,12 +214,7 @@ export default function HomeContainer() {
                     </Box>
                   </Paper>
                 </Grid>
-              ))}
-            </Grid>
-          </Box>
-          <Box>
-            <Grid container gap={2}>
-              {["", ""].map((v, i) => (
+              )) : Array(2).fill().map((v, i) => (
                 <Grid item xs key={i}>
                   <Paper elevation={3}>
                     <AspectRatio
